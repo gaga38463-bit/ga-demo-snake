@@ -4,6 +4,14 @@
 const SUPABASE_URL = "https://skhdzmgxjiqawbrdjflm.supabase.co";
 const MAX_SCORE = 400; // 20x20 board, one point per food
 
+// `vercel dev` does not read .env.local for functions, so load it ourselves
+// when running locally. On Vercel the variable comes from project settings.
+if (!process.env.SUPABASE_SECRET_KEY) {
+  try {
+    process.loadEnvFile(require("node:path").join(__dirname, "..", ".env.local"));
+  } catch {}
+}
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
