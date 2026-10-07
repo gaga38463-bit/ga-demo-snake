@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "snake",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "5173"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vercel", "dev", "--listen", "5173"],
       "port": 5173
     }
   ]

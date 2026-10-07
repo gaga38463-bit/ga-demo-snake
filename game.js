@@ -21,7 +21,7 @@
   let username = "";
   let snake, dir, nextDirs, food, score, timer;
 
-  // --- Supabase (plain REST, no library needed) ---
+  // --- Supabase (plain REST, no library needed; read-only from the browser) ---
 
   async function api(path, options = {}) {
     const res = await fetch(`${supabaseUrl}/rest/v1/${path}`, {
@@ -33,7 +33,7 @@
       },
     });
     if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
-    return res.status === 204 || res.status === 201 ? null : res.json();
+    return res.json();
   }
 
   async function loadLeaderboard() {
@@ -61,11 +61,13 @@
 
   async function saveScore() {
     try {
-      await api("scores", {
+      // Browsers cannot write to the database directly; the server function does it.
+      const res = await fetch("/api/submit-score", {
         method: "POST",
-        headers: { Prefer: "return=minimal" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, score }),
       });
+      if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
     } catch (err) {
       console.error(err);
       leaderboardStatus.textContent = "Could not save your score.";
