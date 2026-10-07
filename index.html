@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Snake</h1>
+
+    <form id="name-screen" class="card" hidden>
+      <label for="name-input">Pick a username to play</label>
+      <input id="name-input" maxlength="16" autocomplete="off" required placeholder="Your name">
+      <button type="submit">Play</button>
+    </form>
+
+    <div id="game-screen" hidden>
+      <div class="bar">
+        <span>Player: <strong id="player-name"></strong> <button id="change-name" class="link" type="button">change</button></span>
+        <span>Score: <strong id="score">0</strong></span>
+      </div>
+      <div class="board">
+        <canvas id="board" width="400" height="400"></canvas>
+        <div id="overlay" class="overlay">
+          <p id="overlay-text"></p>
+          <button id="start" type="button">Start</button>
+        </div>
+      </div>
+      <p class="hint">Arrow keys or WASD to steer. Swipe on a phone.</p>
+    </div>
+
+    <section class="card">
+      <h2>Leaderboard</h2>
+      <ol id="leaderboard"></ol>
+      <p id="leaderboard-status" class="hint"></p>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

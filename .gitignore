@@ -1,0 +1,4 @@
+.vercel
+supabase/.temp
+.env*
+.DS_Store
